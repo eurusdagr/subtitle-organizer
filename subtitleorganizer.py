@@ -13,9 +13,12 @@ for file in os.listdir(directory):
             movie = ia.search_movie(file)
             selected_movie = movie[0]
             for m in movie:
-                if "Japanese" in m.get("languages", []):  # or use another key
-                    movie = m
+                movie = m.getID()
+                movie = ia.get_movie(movie)
+                if "ja" in movie.get("language codes", []):  # or use another key
+                    selected_movie = m
                     break
+
             movie = selected_movie.getID()
             movie = ia.get_movie(movie)
         except IndexError:
