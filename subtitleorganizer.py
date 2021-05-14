@@ -1,6 +1,7 @@
 import imdb
 import os
 import shutil
+import re
 
 ia = imdb.IMDb()
 directory = os.chdir(input())
@@ -10,7 +11,9 @@ for file in os.listdir(directory):
 
     else:
         try:
-            movie = ia.search_movie(file)
+            file1 = os.path.splitext(file)[0]
+            print(file1)
+            movie = ia.search_movie(file1)
             selected_movie = movie[0]
             for m in movie:
                 movie = m.getID()
