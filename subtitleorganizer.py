@@ -15,7 +15,7 @@ for file in os.listdir(directory):
             for m in movie:
                 movie = m.getID()
                 movie = ia.get_movie(movie)
-                if "ja" in movie.get("language codes", []):  # or use another key
+                if "ja" in movie.get(("language codes",)[0]):
                     selected_movie = m
                     break
 
@@ -23,6 +23,9 @@ for file in os.listdir(directory):
             movie = ia.get_movie(movie)
         except IndexError:
             print("API didn't find anything")
+            pass
+        except TypeError:
+            print("Movie in that language wasn't found")
         else:
             try:
                 for director in movie["directors"]:
