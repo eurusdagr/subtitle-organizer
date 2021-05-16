@@ -12,9 +12,9 @@ for file in os.listdir(directory):
     else:
         try:
             file1 = os.path.splitext(file)[0]
-            print(file1)
             movie = ia.search_movie(file1)
             selected_movie = movie[0]
+            print(file1)
             for m in movie:
                 movie = m.getID()
                 movie = ia.get_movie(movie)
@@ -38,13 +38,17 @@ for file in os.listdir(directory):
                         directorname = director["name"]
                         if os.path.isdir(directorname) == True:
                             shutil.move(file, directorname)
+                            print("copied",file, "to the ", directorname, "folder")
                         else:
                             os.mkdir(director["name"])
                             shutil.move(file, directorname)
+                            print("created the",directorname,"folder and copied",file,"to it")
                     except TypeError:
                         print("")
                         pass
                     except shutil.Error:
+                        print("fould duplacete,deleting it...")
+                        os.remove(file)
 
                         pass
                     except FileNotFoundError:
