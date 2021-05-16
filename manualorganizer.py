@@ -24,6 +24,8 @@ for file in os.listdir(directory):
             print("created",foldername,"folder and copied the file")
 
         except shutil.Error:
+         print("fould duplacete,deleting it...")
+         os.remove(file)
          pass
         except FileNotFoundError:
          pass
